@@ -120,17 +120,16 @@ var drawLines = function(penguins, graph, xScale, yScale)
     var dots = d3.select("svg")
         .select(".graph")
         .selectAll("circle")
-        .data(penguins)
+        .data(penguins[0].quizes)
         .enter()
         .append("circle")
-        .attr("cx",function(penguin, i)
+        .attr("cx",function(quiz, i)
         {
-            return xScale(penguin.quizes.map(getQuizDay));    
+            return xScale(i);    
         })
-        .attr("cy",function(penguin)
+        .attr("cy",function(quiz)
         {
-            console.log(penguin);
-            return yScale(penguin.quizes.map(getQuizzes));  
+            return yScale(getQuizzes(quiz));  
         })
         .attr("r",2);
     
