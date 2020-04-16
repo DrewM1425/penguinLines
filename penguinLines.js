@@ -3,21 +3,21 @@ var createLabels = function(screen, margins, graph)
 {
     var labels = d3.select("svg")
         .append("g")
-        .classed("labels",true)
+        .classed("labels",true);
         
     labels.append("text")
         .text("Quiz Grades Over Time")
         .classed("title",true)
         .attr("text-anchor","middle")
         .attr("x",margins.left+(graph.width/2))
-        .attr("y",margins.top)
+        .attr("y",margins.top);
     
     labels.append("text")
         .text("Quiz")
         .classed("label",true)
         .attr("text-anchor","middle")
         .attr("x",margins.left+(graph.width/2))
-        .attr("y",screen.height)
+        .attr("y",screen.height);
     
     labels.append("g")
         .attr("transform","translate(20,"+ 
@@ -26,8 +26,7 @@ var createLabels = function(screen, margins, graph)
         .text("Grades")
         .classed("label",true)
         .attr("text-anchor","middle")
-        .attr("transform","rotate(90)")
-    
+        .attr("transform","rotate(90)");
     
 }
 
@@ -57,10 +56,7 @@ var drawLines = function(penguins, graph, xScale, yScale)
                             .x(function (quiz,i)
                               {return xScale(i);})
                             .y(function (quiz)
-                               
-                              {
-                                console.log(quiz)
-                                return yScale(quiz);})
+                              {return yScale(quiz);})
                             .curve(d3.curveCardinal);
     
     var lines = d3.select("svg")
@@ -72,13 +68,71 @@ var drawLines = function(penguins, graph, xScale, yScale)
         .classed("line",true)
         .attr("fill","none")
         .attr("stroke","blue")
+        .attr("stroke-width", 3)
+        .on("mouseover",function(penguin)
+        {   
+            if(! d3.select(this).classed("off"))
+            {
+                d3.selectAll(".line")
+                .classed("fade",true);
+
+                d3.select(this)
+                    .classed("fade",false)
+                    .raise(); //move to top
+
+
+                //create tooltips for the penguin pics
+                var xPosition = d3.event.pageX + 20;
+                var yPosition = d3.event.pageY - 160;
+
+
+                d3.select("#tooltip")
+                    .style("left", xPosition + "px")
+                    .style("top", yPosition + "px");
+
+
+                d3.select("#tooltip #peng")
+                    .attr("src", "imgs/" + penguin.picture);
+
+                d3.select("#tooltip").classed("hidden", false);
+            }
+            
+        })
+        .on("mouseout",function(penguin)
+           {
+            if(! d3.select(this).classed("off"))
+            {
+                d3.selectAll(".line")
+                    .classed("fade",false);
+            }
+            
+            d3.select("#tooltip").classed("hidden", true);
+            
+        });
         
     
     
     lines.append("path")
         .datum(function(penguin) 
             { return penguin.quizes.map(getQuizzes);})
-        .attr("d",lineGenerator)
+        .attr("d",lineGenerator);
+    
+    var dots = d3.select("svg")
+        .select(".graph")
+        .selectAll("circle")
+        .data(penguins)
+        .enter()
+        .append("circle")
+        .attr("cx",function(penguin, i)
+        {
+            return xScale(penguin.quizes.map(getQuizDay));    
+        })
+        .attr("cy",function(penguin)
+        {
+            console.log(penguin);
+            return yScale(penguin.quizes.map(getQuizzes));  
+        })
+        .attr("r",2);
     
 }
 
@@ -87,12 +141,17 @@ var getQuizzes = function(quiz)
     return quiz.grade;
 }
 
+var getQuizDay = function(quiz)
+{
+    return quiz.day;
+}
+
 
 
 var initGraph = function(penguins)
 {
     //the size of the screen
-    var screen = {width:500, height:400};
+    var screen = {width:800, height:550};
     
     //how much space will be on each side of the graph
     var margins = {top:15,bottom:40,left:70,right:40};
@@ -117,8 +176,6 @@ var initGraph = function(penguins)
              margins.top+")");
         
     //create scales for all of the dimensions
-    
-    
     var xScale = d3.scaleLinear()
         .domain([0, penguins[0].quizes.length-1])
         .range([0,graph.width])

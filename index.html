@@ -86,7 +86,7 @@
         
             #tooltip {
                 position: absolute;
-                width: 200px;
+                width: auto;
                 height: auto;
                 padding: 10px;
                 background-color: white;
@@ -106,8 +106,14 @@
                 line-height: 20px;
             }
         
-            circle {
+            line {
                 cursor: pointer;
+                pointer-events: none;
+            }
+        
+            .off,.fade
+            {
+                opacity:.1;
             }
         
     </style>
@@ -126,10 +132,6 @@
         
         
     <div id="tooltip" class="hidden">
-        <p><span id="final">100</span></p>
-        <p><span id="quiz">100</span></p>
-        <p><span id="hw">100</span></p>
-        <p><span id="test">100</span></p>
         <img id="peng" \>
     </div>
     
