@@ -1,0 +1,145 @@
+<html>
+    <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    
+    <style>
+            body {
+              background-color: #0B0C10;
+              background-size: cover;
+              color: #C5C6C7;
+              font-family: Verdana,sans-serif;
+            }
+        
+            @keyframes slideIn {
+                0% {
+                transform: translateX(-100px);
+                opacity: 0;
+                }
+                100% {
+                transform: translateX(0);
+                opacity: 1;
+                }
+            }
+        
+            a, p, label {
+                color: #f6b93b;
+            }
+
+            a:hover{
+                color: #C5C6C7;
+            }
+        
+            h1 {
+                margin: 2px;
+                color: #f6b93b;
+            }
+        
+            img {
+                width: 140px;
+                height: 140px;
+            }
+        
+            td 
+            {
+                border: solid 3px cyan;
+                margin: 3px;
+                text-align: center;
+            }
+            th 
+            {
+                border: solid 3px cyan;
+                margin: 2px;
+                color: #f6b93b;
+            }
+        
+        
+            svg {
+                background-color: white;
+                border-radius: 8px;
+                padding: 10px;
+                overflow: visible;
+            }
+        
+            button {
+                background-color: lightcyan;
+                padding: 10px;
+                outline-color: black;
+                border-radius: 8px;
+                text-decoration: none;
+                transition-duration: 0.4s;
+                font-family: Verdana,sans-serif;
+                margin-bottom: 15px;
+                cursor: pointer;
+            }
+        
+            button:hover {
+                background-color: lightblue;
+            }
+        
+            #scat {
+                position: relative;
+                opacity: 0;
+                animation: slideIn 1s forwards;
+                animation-delay: .7s;
+                margin-top: 20px;
+            }
+        
+            #tooltip {
+                position: absolute;
+                width: 200px;
+                height: auto;
+                padding: 10px;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+                pointer-events: none;
+            }
+
+            #tooltip.hidden {
+                display: none;
+            }
+
+            #tooltip p {
+                margin: 0;
+                font-family: sans-serif;
+                font-size: 16px;
+                line-height: 20px;
+            }
+        
+            circle {
+                cursor: pointer;
+            }
+        
+    </style>
+    
+    
+    </head>
+    <title>Penguin Summaries</title>
+    
+    <body>
+        
+    <h1>Penguin Class</h1>
+        
+    <svg>
+    
+    </svg>
+        
+        
+    <div id="tooltip" class="hidden">
+        <p><span id="final">100</span></p>
+        <p><span id="quiz">100</span></p>
+        <p><span id="hw">100</span></p>
+        <p><span id="test">100</span></p>
+        <img id="peng" \>
+    </div>
+    
+    
+    
+    </body>
+    
+    <script src="penguinLines.js"></script>
+
+
+
+
+</html> 
