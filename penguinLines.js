@@ -1,4 +1,40 @@
 
+var createLabels = function()
+{
+    
+    
+}
+
+
+var createAxes = function()
+{
+    
+    
+}
+
+
+var drawLines = function()
+{
+    
+    
+}
+
+
+
+
+
+var initGraph(penguins)
+{
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 
