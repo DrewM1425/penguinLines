@@ -195,7 +195,7 @@ var initGraph = function(penguins)
     
     var yScale = d3.scaleLinear()
         .domain([lowGrade,highGrade])
-        .range([graph.height,0])
+        .range([graph.height,margins.top])
     
     createLabels(screen, margins, graph);
     createAxes(screen, margins, graph, xScale, yScale);
