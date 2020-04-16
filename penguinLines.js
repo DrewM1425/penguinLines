@@ -77,14 +77,12 @@ var drawLines = function(penguins, graph, xScale, yScale)
                 d3.selectAll(".line")
                 .classed("fade",true);
                 
-                d3.select(this + ">circle")
-                //.selectAll(".circle")
-                .attr("visibility", "visible");
-
+                
                 d3.select(this)
                     .classed("fade",false)
                     .raise(); //move to top
-
+                
+                
 
                 //create tooltips for the penguin pics
                 var xPosition = d3.event.pageX + 20;
@@ -110,8 +108,6 @@ var drawLines = function(penguins, graph, xScale, yScale)
                 d3.selectAll(".line")
                     .classed("fade",false);
                 
-                d3.selectAll(".circle")
-                    .classed("fade",true);
             }
             
             d3.select("#tooltip").classed("hidden", true);
