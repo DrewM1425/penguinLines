@@ -73,8 +73,13 @@ var drawLines = function(penguins, graph, xScale, yScale)
         {   
             if(! d3.select(this).classed("off"))
             {
+                //line fade
                 d3.selectAll(".line")
                 .classed("fade",true);
+                
+                d3.select(this + ">circle")
+                //.selectAll(".circle")
+                .attr("visibility", "visible");
 
                 d3.select(this)
                     .classed("fade",false)
@@ -104,6 +109,9 @@ var drawLines = function(penguins, graph, xScale, yScale)
             {
                 d3.selectAll(".line")
                     .classed("fade",false);
+                
+                d3.selectAll(".circle")
+                    .classed("fade",true);
             }
             
             d3.select("#tooltip").classed("hidden", true);
@@ -117,21 +125,15 @@ var drawLines = function(penguins, graph, xScale, yScale)
             { return penguin.quizes.map(getQuizzes);})
         .attr("d",lineGenerator);
     
-    var dots = d3.select("svg")
-        .select(".graph")
-        .selectAll("circle")
-        .data(penguins[0].quizes)
-        .enter()
+    lines.selectAll("circle")
+    		.data(function(penguin) 
+            { return penguin.quizes.map(getQuizzes);})
+    	.enter()
         .append("circle")
-        .attr("cx",function(quiz, i)
-        {
-            return xScale(i);    
-        })
-        .attr("cy",function(quiz)
-        {
-            return yScale(getQuizzes(quiz));  
-        })
-        .attr("r",2);
+        .attr("class", "data-circle")
+        .attr("r", 3)
+        .attr("cx", function(quiz, i) { return xScale(i); })
+        .attr("cy", function(quiz) { return yScale(quiz); });
     
 }
 
