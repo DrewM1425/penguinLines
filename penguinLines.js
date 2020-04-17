@@ -77,13 +77,15 @@ var drawLines = function(penguins, graph, xScale, yScale)
                 d3.selectAll(".line")
                 .classed("fade",true);
                 
-                
                 d3.select(this)
                     .classed("fade",false)
                     .raise(); //move to top
                 
+                d3.select(this)
+                    .selectAll("circle")
+                    .classed("hide", false);
                 
-
+                
                 //create tooltips for the penguin pics
                 var xPosition = d3.event.pageX + 20;
                 var yPosition = d3.event.pageY - 160;
@@ -108,6 +110,10 @@ var drawLines = function(penguins, graph, xScale, yScale)
                 d3.selectAll(".line")
                     .classed("fade",false);
                 
+                d3.select(this)
+                    .selectAll("circle")
+                    .classed("hide", true);
+                
             }
             
             d3.select("#tooltip").classed("hidden", true);
@@ -126,7 +132,8 @@ var drawLines = function(penguins, graph, xScale, yScale)
             { return penguin.quizes.map(getQuizzes);})
     	.enter()
         .append("circle")
-        .attr("class", "data-circle")
+        .attr("class", "hide")
+        .attr("fill", "blue")
         .attr("r", 3)
         .attr("cx", function(quiz, i) { return xScale(i); })
         .attr("cy", function(quiz) { return yScale(quiz); });
